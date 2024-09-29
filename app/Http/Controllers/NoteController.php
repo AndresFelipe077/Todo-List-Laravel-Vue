@@ -15,7 +15,7 @@ class NoteController extends Controller
      */
     public function index(): JsonResponse
     {
-        $tasks = Note::where('user_id', auth('api')->user()->id)->get();
+        $tasks = Note::where('user_id', 1)->get();
         return response()->json($tasks);
     }
 
@@ -52,6 +52,7 @@ class NoteController extends Controller
     public function show(string $id): JsonResponse
     {
         $task = Note::findOrFail($id);
+        $task->tags = json_decode($task->tags, true);
         return response()->json($task, 200);
     }
 
@@ -60,7 +61,26 @@ class NoteController extends Controller
      */
     public function update(Request $request, string $id): JsonResponse
     {
+        
+        
+        // Validar la solicitud (opcional)
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+        ]);
+
         $task = Note::findOrFail($id);
+
+        // Agregar el ID del usuario
+        $request->request->add(['user_id' => 1]);
+
+        // Manejar la carga de la imagen
+        if ($request->hasFile('file')) {
+            $imagePath = $request->file('file')->store('images', 'public'); // Guarda la imagen en el directorio 'storage/app/public/images'
+            $request->request->add(['image' => $imagePath]); // Agrega la ruta de la imagen al request
+        }
+
+        // Crear la tarea
         $task->update($request->all());
         return response()->json($task, 200);
     }

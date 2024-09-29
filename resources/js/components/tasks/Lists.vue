@@ -15,10 +15,10 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             <tr v-for="task in tasks" :key="task.id">
-                                <td class="px-6 py-4 whitespace-nowrap">{{ task.title }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ task.description }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ task.due_date }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 whitespace-nowrap dark:bg-slate-800">{{ task.title }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap dark:bg-slate-800">{{ task.description }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap dark:bg-slate-800">{{ task.due_date }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap dark:bg-slate-800">
                                     <button @click="editTask(task.id)" class="text-blue-500 hover:text-blue-700">Editar</button>
                                     <button @click="deleteTask(task.id)" class="text-red-500 hover:text-red-700 ml-4">Eliminar</button>
                                 </td>
@@ -56,7 +56,7 @@ export default {
         editTask(id) {
             // Lógica para editar la tarea
             console.log(`Editar tarea con ID: ${id}`);
-            // Aquí puedes redirigir a un formulario de edición o abrir un modal
+            this.$router.push('/edit/' + id);
         },
         deleteTask(id) {
             if (confirm('¿Estás seguro de que deseas eliminar esta tarea?')) {

@@ -10,3 +10,4 @@ Route::get('/user', function (Request $request) {
 
 
 Route::apiResource('tasks', NoteController::class);
+Route::post('tasks/{id}', [NoteController::class, 'update']);

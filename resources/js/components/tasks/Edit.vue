@@ -3,7 +3,7 @@
         <div class="row justify-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header text-center text-lg font-bold">Crear Tarea</div>
+                    <div class="card-header text-center text-lg font-bold">Actualizar Tarea</div>
 
                     <form @submit.prevent="saveTask">
                         <div class="mb-4">
@@ -21,8 +21,7 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="due_date" class="block text-sm font-medium text-gray-700">Fecha de
-                                Vencimiento</label>
+                            <label for="due_date" class="block text-sm font-medium text-gray-700">Fecha de Vencimiento</label>
                             <input type="date" v-model="due_date" id="due_date"
                                 class="mt-1 block w-full border border-gray-300 rounded-md p-2 text-dark">
                         </div>
@@ -30,8 +29,7 @@
                         <div class="mb-4">
                             <label for="image" class="block text-sm font-medium text-gray-700">Imagen</label>
                             <input type="file" @change="onFileChange" id="image"
-                                class="mt-1 block w-full border border-gray-300 rounded-md p-2 text-dark" accept="image/*"
-                                required>
+                                class="mt-1 block w-full border border-gray-300 rounded-md p-2" accept="image/*">
                         </div>
 
                         <div class="mb-4">
@@ -69,10 +67,26 @@ export default {
             due_date: '',
             image: null,
             newTag: '',
-            tags: []
+            tags: [],
+            taskId: this.$route.params.id // Captura el ID de la URL
         };
     },
+    created() {
+        this.fetchTask(this.taskId); // Llama a la función para obtener la tarea
+    },
     methods: {
+        fetchTask(id) {
+            axios.get(`/api/tasks/${id}`)
+                .then(response => {
+                    this.title = response.data.title;
+                    this.description = response.data.description;
+                    this.due_date = response.data.due_date;
+                    this.tags = response.data.tags || []; // Asigna las etiquetas si existen
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
         onFileChange(event) {
             const file = event.target.files[0];
             if (file) {
@@ -98,11 +112,12 @@ export default {
             }
             formData.append('tags', JSON.stringify(this.tags));
 
-            axios.post('api/tasks', formData) // Cambiado aquí
+            axios.put(`/api/tasks/${this.taskId}`, formData) // Cambiado a PUT para actualizar
                 .then(response => {
                     console.log(response);
                     this.$router.push('/');
-                }).catch(error => {
+                })
+                .catch(error => {
                     console.log(error.response);
                 });
         }

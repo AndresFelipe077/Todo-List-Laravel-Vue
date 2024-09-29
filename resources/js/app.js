@@ -6,6 +6,7 @@ const app = createApp({});
 
 import Form from './components/tasks/Form.vue';
 import Tasks from './components/tasks/Lists.vue';
+import Edit from './components/tasks/Edit.vue';
 
 const routes = [
     {
@@ -16,6 +17,10 @@ const routes = [
         path: '/form',
         component: Form,
     },
+    {
+        path: '/edit/:id',
+        component: Edit
+    }    
 ];
 
 const router = createRouter({
