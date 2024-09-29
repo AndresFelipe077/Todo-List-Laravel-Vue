@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -43,5 +45,17 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function setCreatedAtAttribute($value)
+    {
+        date_default_timezone_set("America/Bogota");
+        $this->attributes['created_at'] = Carbon::now();
+    }
+
+    public function setUpdatedAtAttribute($value)
+    {
+        date_default_timezone_set("America/Bogota");
+        $this->attributes['updated_at'] = Carbon::now();
     }
 }
