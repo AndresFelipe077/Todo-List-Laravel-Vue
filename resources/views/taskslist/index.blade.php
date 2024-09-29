@@ -10,6 +10,14 @@
             Tasks lists
         </router-link>
 
+        <router-link to="/login" class="text-xl text-white mx-3 p-2" active-class="font-bold" exact>
+            Login
+        </router-link>
+
+        <router-link to="/register" class="text-xl text-white mx-3 p-2" active-class="font-bold" exact>
+            Register
+        </router-link>
+
     </nav>
 
     <div>
