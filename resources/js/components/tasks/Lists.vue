@@ -8,9 +8,10 @@
                     <!-- Dropdown para ordenar -->
                     <div class="my-4">
                         <label for="sort">Ordenar por:</label>
-                        <select v-model="sortBy" id="sort" class="ml-2 p-1 border">
-                            <option value="created_at">Fecha de creación</option>
-                            <option value="due_date">Fecha de vencimiento</option>
+                        <select v-model="sortBy" id="sort" class="ml-2 p-1 border rounded" aria-placeholder="Filtro">
+                            <option disabled value="" selected>Selecciona un criterio</option>
+                            <option value="created_at" class="text-dark">Fecha de creación</option>
+                            <option value="due_date" class="text-dark">Fecha de vencimiento</option>
                         </select>
                     </div>
 
@@ -116,5 +117,8 @@ export default {
 <style scoped>
 .container {
     max-width: 800px;
+}
+.text-dark {
+    color: black !important;
 }
 </style>
