@@ -15,13 +15,13 @@
                 </div>
                 <div class="mb-4">
                     <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                    <input type="password" v-model="password" id="password" required
+                    <input type="password" v-model="password" id="password" required autocomplete="password"
                         class="mt-1 p-2 w-full border rounded text-dark" />
                 </div>
                 <div class="mb-4">
                     <label for="confirm_password" class="block text-sm font-medium text-gray-700">Confirmar
                         contraseña</label>
-                    <input type="password" v-model="password_confirmation" id="confirm_password" required
+                    <input type="password" v-model="password_confirmation" id="confirm_password" required autocomplete="password_confirmation"
                         class="mt-1 p-2 w-full border rounded text-dark" />
                 </div>
                 <div class="flex items-center justify-between">

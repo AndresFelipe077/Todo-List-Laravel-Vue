@@ -42,6 +42,9 @@ export default {
 
             axios.post('api/login', data) // Cambiado aquí
                 .then(response => {
+                    const token = response.data.access_token.name; // Acceder al nombre del token
+                    localStorage.setItem('access_token', token);
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                     this.$router.push('/');
                 }).catch(error => {
                     alert(error.response.data.message);

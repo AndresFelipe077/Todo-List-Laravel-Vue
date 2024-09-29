@@ -75,13 +75,9 @@ export default {
     computed: {
         sortedTasks() {
             const tasksCopy = JSON.parse(JSON.stringify(this.tasks));
-
             const sorted = tasksCopy.sort((a, b) => {
-                console.log('Ordenando:', a[this.sortBy], b[this.sortBy]); // Depuración
                 return new Date(a[this.sortBy]) - new Date(b[this.sortBy]);
             });
-
-            console.log('Tareas ordenadas:', sorted); // Verificar las tareas ordenadas
             return sorted;
         }
     },
@@ -96,7 +92,6 @@ export default {
                 });
         },
         editTask(id) {
-            console.log(`Editar tarea con ID: ${id}`);
             this.$router.push('/edit/' + id);
         },
         deleteTask(id) {
