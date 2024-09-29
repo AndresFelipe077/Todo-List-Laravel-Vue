@@ -8,6 +8,7 @@
                         <thead>
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Título</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Imagen</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descripción</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha de Vencimiento</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
@@ -16,6 +17,7 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                             <tr v-for="task in tasks" :key="task.id">
                                 <td class="px-6 py-4 whitespace-nowrap dark:bg-slate-800">{{ task.title }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap dark:bg-slate-800"><img :src="task.image" :alt="task.title" /></td>
                                 <td class="px-6 py-4 whitespace-nowrap dark:bg-slate-800">{{ task.description }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap dark:bg-slate-800">{{ task.due_date }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap dark:bg-slate-800">

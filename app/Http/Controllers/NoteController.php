@@ -15,7 +15,7 @@ class NoteController extends Controller
      */
     public function index(): JsonResponse
     {
-        $tasks = Note::where('user_id', 1)->get();
+        $tasks = Note::where('user_id', 1)->orderBy('id', 'desc')->get();
         return response()->json($tasks);
     }
 

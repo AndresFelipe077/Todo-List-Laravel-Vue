@@ -112,7 +112,7 @@ export default {
             }
             formData.append('tags', JSON.stringify(this.tags));
 
-            axios.put(`/api/tasks/${this.taskId}`, formData) // Cambiado a PUT para actualizar
+            axios.post(`/api/tasks/${this.taskId}`, formData) // Cambiado a PUT para actualizar
                 .then(response => {
                     console.log(response);
                     this.$router.push('/');
