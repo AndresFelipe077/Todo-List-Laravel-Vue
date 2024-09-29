@@ -5,12 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Todo list Vue</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
+    {{-- @vite('resources/css/app.css') --}}
     <!-- Styles -->
     <style>
         /* ! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com */
@@ -945,7 +946,7 @@
                 <main class="mt-6">
 
                     <div id="app">
-                        <example-component />
+                        @yield("content")
                     </div>
 
                 </main>
@@ -957,8 +958,8 @@
         </div>
     </div>
 
-
-    <script src="{{ asset('js/app.js') }}"></script>
+    {{-- <script src="{{ asset("js/app.js") }}" defer></script> --}}
+    @vite('resources/js/app.js')
 
 </body>
 
