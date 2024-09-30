@@ -29,5 +29,10 @@ export default defineConfig({
         outDir: 'public/build',
     },
     // Añadir la configuración para los assets públicos
-    base: process.env.NODE_ENV === 'production' ? '/build/' : '/'
+    base: process.env.NODE_ENV === 'production' ? '/build/' : '/',
+    server: { 
+        hmr: {
+            host: 'localhost',
+        },
+    }, 
 });
