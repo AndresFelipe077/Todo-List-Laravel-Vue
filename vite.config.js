@@ -25,4 +25,9 @@ export default defineConfig({
             vue: 'vue/dist/vue.esm-bundler.js',
         },
     },
+    build: {
+        outDir: 'public/build',
+    },
+    // Añadir la configuración para los assets públicos
+    base: process.env.NODE_ENV === 'production' ? '/build/' : '/'
 });
