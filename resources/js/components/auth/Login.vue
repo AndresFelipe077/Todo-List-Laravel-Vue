@@ -47,12 +47,8 @@ export default {
 
             axios.post('api/login', data) // Cambiado aquí
                 .then(response => {
-                    console.log(response);
-                    
-                    // Almacena el token en localStorage o Vuex
                     localStorage.setItem('token', response.data.access_token);
                     localStorage.setItem('user', response.data.user);
-
                     this.$router.push('/');
                 }).catch(error => {
                     alert(error.response.data.message);

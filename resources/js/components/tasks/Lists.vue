@@ -94,7 +94,9 @@ export default {
                     this.tasks = response.data;
                 })
                 .catch(error => {
-                    console.log(error);
+                    if (error.status == 401) {
+                        this.$router.push('/login');
+                    }
                 });
         }
         ,
