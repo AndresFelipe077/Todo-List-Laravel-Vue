@@ -37,6 +37,9 @@ export default {
         logout() {
             localStorage.removeItem('token');
             this.$router.push('/login');
+            setTimeout(() => {
+                window.location.reload();
+            }, 50);
         }
     }
 }

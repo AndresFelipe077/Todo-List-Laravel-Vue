@@ -33,6 +33,11 @@ export default {
             password: ''
         };
     },
+    computed: {
+        isAuthenticated() {
+            return !!localStorage.getItem('token');
+        }
+    },
     methods: {
         login() {
             if (!this.email || !this.password) {
@@ -50,6 +55,9 @@ export default {
                     localStorage.setItem('token', response.data.access_token);
                     localStorage.setItem('user', response.data.user);
                     this.$router.push('/');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 50);
                 }).catch(error => {
                     alert(error.response.data.message);
                 });
