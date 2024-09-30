@@ -2,8 +2,8 @@
 
 @section('content')
     <nav class="flex p-4">
-        
-        <router-link to="/form" class="text-xl text-white mx-3 p-2" active-class="font-bold" exact>
+
+        {{-- <router-link to="/form" class="text-xl text-white mx-3 p-2" active-class="font-bold" exact>
             Add task
         </router-link>
 
@@ -17,11 +17,13 @@
 
         <router-link to="/register" class="text-xl text-white mx-3 p-2" active-class="font-bold" exact>
             Register
-        </router-link>
+        </router-link> --}}
+        <nav-bar></nav-bar>
 
     </nav>
 
     <div>
         <router-view></router-view>
     </div>
+    
 @endsection

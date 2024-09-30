@@ -30,8 +30,8 @@
                         <div class="mb-4">
                             <label for="image" class="block text-sm font-medium text-gray-700">Imagen</label>
                             <input type="file" @change="onFileChange" id="image"
-                                class="mt-1 block w-full border border-gray-300 rounded-md p-2 text-dark" accept="image/*"
-                                required>
+                                class="mt-1 block w-full border border-gray-300 rounded-md p-2 text-dark"
+                                accept="image/*" required>
                         </div>
 
                         <div class="mb-4">
@@ -89,6 +89,7 @@ export default {
             this.tags.splice(index, 1);
         },
         saveTask() {
+            const token = localStorage.getItem('token');
             const formData = new FormData();
             formData.append('title', this.title);
             formData.append('description', this.description);
@@ -98,7 +99,11 @@ export default {
             }
             formData.append('tags', JSON.stringify(this.tags));
 
-            axios.post('api/tasks', formData) // Cambiado aquí
+            axios.post('api/tasks', formData, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
                 .then(response => {
                     console.log(response);
                     this.$router.push('/');

@@ -21,7 +21,8 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="due_date" class="block text-sm font-medium text-gray-700">Fecha de Vencimiento</label>
+                            <label for="due_date" class="block text-sm font-medium text-gray-700">Fecha de
+                                Vencimiento</label>
                             <input type="date" v-model="due_date" id="due_date"
                                 class="mt-1 block w-full border border-gray-300 rounded-md p-2 text-dark">
                         </div>
@@ -68,20 +69,25 @@ export default {
             image: null,
             newTag: '',
             tags: [],
-            taskId: this.$route.params.id // Captura el ID de la URL
+            taskId: this.$route.params.id
         };
     },
     created() {
-        this.fetchTask(this.taskId); // Llama a la función para obtener la tarea
+        this.fetchTask(this.taskId);
     },
     methods: {
         fetchTask(id) {
-            axios.get(`/api/tasks/${id}`)
+            const token = localStorage.getItem('token');
+            axios.get(`/api/tasks/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
                 .then(response => {
                     this.title = response.data.title;
                     this.description = response.data.description;
                     this.due_date = response.data.due_date;
-                    this.tags = response.data.tags || []; // Asigna las etiquetas si existen
+                    this.tags = response.data.tags || [];
                 })
                 .catch(error => {
                     console.error(error);
@@ -103,6 +109,8 @@ export default {
             this.tags.splice(index, 1);
         },
         saveTask() {
+            const token = localStorage.getItem('token');
+
             const formData = new FormData();
             formData.append('title', this.title);
             formData.append('description', this.description);
@@ -112,7 +120,11 @@ export default {
             }
             formData.append('tags', JSON.stringify(this.tags));
 
-            axios.post(`/api/tasks/${this.taskId}`, formData) // Cambiado a PUT para actualizar
+            axios.post(`/api/tasks/${this.taskId}`, formData, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
                 .then(response => {
                     console.log(response);
                     this.$router.push('/');

@@ -83,20 +83,33 @@ export default {
     },
     methods: {
         fetchTasks() {
-            axios.get('api/tasks')
+            const token = localStorage.getItem('token');
+
+            axios.get('api/tasks', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
                 .then(response => {
                     this.tasks = response.data;
                 })
                 .catch(error => {
                     console.log(error);
                 });
-        },
+        }
+        ,
         editTask(id) {
             this.$router.push('/edit/' + id);
         },
         deleteTask(id) {
+            const token = localStorage.getItem('token');
+
             if (confirm('¿Estás seguro de que deseas eliminar esta tarea?')) {
-                axios.delete(`api/tasks/${id}`)
+                axios.delete(`api/tasks/${id}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
                     .then(() => {
                         this.fetchTasks(); // Refrescar la lista después de eliminar
                     })
@@ -113,6 +126,7 @@ export default {
 .container {
     max-width: 800px;
 }
+
 .text-dark {
     color: black !important;
 }

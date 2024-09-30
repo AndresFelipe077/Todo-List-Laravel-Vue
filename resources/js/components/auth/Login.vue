@@ -47,17 +47,15 @@ export default {
 
             axios.post('api/login', data) // Cambiado aquí
                 .then(response => {
-                    const { user, access_token } = response.data;
-
+                    console.log(response);
+                    
                     // Almacena el token en localStorage o Vuex
-                    localStorage.setItem('token', access_token.plainTextToken);
-                    // this.$store.commit('setUser', user); // Almacena el usuario en Vuex
+                    localStorage.setItem('token', response.data.access_token);
+                    localStorage.setItem('user', response.data.user);
 
                     this.$router.push('/');
                 }).catch(error => {
-                    console.error(error);
-                    
-                    // alert(error.response.data.message);
+                    alert(error.response.data.message);
                 });
         }
     }

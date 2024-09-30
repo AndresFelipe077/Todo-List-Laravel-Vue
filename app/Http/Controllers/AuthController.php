@@ -40,7 +40,7 @@ class AuthController extends Controller
         $user = auth()->user();
 
         // Crea un token de acceso
-        $accessToken = $user->createToken('authToken');
+        $accessToken = $user->createToken('authToken')->accessToken;
 
         // Devuelve el usuario y el token
         return response()->json([

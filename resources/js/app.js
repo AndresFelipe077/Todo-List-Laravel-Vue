@@ -4,6 +4,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 const app = createApp({});
 
+import Navbar from './components/shared/Navbar.vue';
+
 import Register from './components/auth/Register.vue';
 import Login from './components/auth/Login.vue';
 
@@ -38,7 +40,7 @@ const router = createRouter({
     history: createWebHistory(),
     routes,
 });
-
+app.component('nav-bar', Navbar);
 app.use(router);
 
 app.mount('#app');
