@@ -3,13 +3,16 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Note extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
+    protected $keyType = 'string';
+    public $incrementing = false;
     protected $guarded = ['id'];
 
     public function getImageAttribute()
