@@ -13,5 +13,5 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::apiResource('tasks', NoteController::class);
-Route::post('tasks/{id}', [NoteController::class, 'update']);
+Route::apiResource('tasks', NoteController::class)->middleware('auth:api');
+Route::post('tasks/{id}', [NoteController::class, 'update'])->middleware('auth:api');
