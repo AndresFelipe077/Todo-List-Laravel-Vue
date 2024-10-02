@@ -31,7 +31,7 @@ class NoteTest extends TestCase
         $this->actingAs($user);
 
         $data = [
-            'title' => 'Test Note',
+            'title'       => 'Test Note',
             'description' => 'This is a test note.',
         ];
 
