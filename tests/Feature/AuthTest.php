@@ -10,15 +10,15 @@ use Tests\TestCase;
 
 class AuthTest extends TestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     #[Test]
     public function user_can_register()
     {
         $response = $this->postJson('/api/register', [
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => 'password',
+            'name'                  => 'Test User',
+            'email'                 => 'test1@example.com',
+            'password'              => 'password',
             'password_confirmation' => 'password',
         ]);
 
@@ -41,14 +41,14 @@ class AuthTest extends TestCase
         ]);
 
         $response->assertStatus(200); // O el código de estado que uses para éxito
-        $this->assertArrayHasKey('token', $response->json());
+        $this->assertArrayHasKey('access_token', $response->json());
     }
 
     #[Test]
     public function user_cannot_login_with_invalid_credentials()
     {
         $response = $this->postJson('/api/login', [
-            'email' => 'wrong@example.com',
+            'email'    => 'wrong@example.com',
             'password' => 'wrongpassword',
         ]);
 
